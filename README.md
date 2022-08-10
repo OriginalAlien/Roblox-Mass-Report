@@ -13,6 +13,6 @@ This could be ran on [Replit](https://replit.com/).
 5. Run `main.py` and type the victim's user and how much reports to send and which type of report to send
 ## Preview
 and stop stealing credits u fucking skids  
-DM Dreamer#5114 on discord for help
+DM `Dreamer#5114` on discord for help
 
 ![image](https://user-images.githubusercontent.com/104280094/183817570-6ddaa4be-0a11-46da-bf2d-3b959ba95d49.png)
