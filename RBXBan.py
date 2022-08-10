@@ -59,9 +59,9 @@ class Utils:
 		
 	def getOutput(amount, request, proxy, useragent):
 		if request.status_code == 200:
-			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | \n\n", Colors.green, interval=0.0025)
+			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | ", Colors.green, interval=0.0025)
 		else:
-			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | \n", Colors.purple_to_red, interval=0.0025)
+			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | ", Colors.purple_to_red, interval=0.0025)
 
 #Style & Designs		
 def getBanner():
