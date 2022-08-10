@@ -30,6 +30,7 @@ except Exception as E:
 
 if amount == 0:
 	Write.Print(f"\n[>] Mass Reporting {victim} inf Times for {reason}...\n", Colors.purple_to_blue, interval=0.0025)
+	
 else:
 	Write.Print(f"\n[>] Mass Reporting {victim} {amount} Times for {reason}...\n\n", Colors.purple_to_blue, interval=0.0025)
 
