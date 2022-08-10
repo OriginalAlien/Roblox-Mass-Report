@@ -1,5 +1,5 @@
-#Importing Modules
-import requests, json
+#Importing Modules and Setting up proxies and useragents and cookie
+import requests, json, lxml
 import random, time
 from bs4 import BeautifulSoup
 from pystyle import Colorate, Colors, Add, Center, Write
@@ -11,7 +11,6 @@ p = open("proxy.txt", "r").readlines()
 cookies    = []
 useragents = []
 proxies    = []
-
 for i in c:
 	cookies.append(i.replace('\n', ''))
 	
@@ -36,33 +35,36 @@ class Utils:
 		return cookie
 
 	def getXCsrf(cookie):
-	      xcsrfRequest = requests.post("https://auth.roblox.com/v2/logout", cookies={
-	          ".ROBLOSECURITY": cookie
-	      })
-		
-	      return xcsrfRequest.headers["x-csrf-token"]
+	    xcsrfRequest = requests.post("https://auth.roblox.com/v2/logout",
+									 
+		headers = {"referer": "https://roblox.com", "User-Agent": Utils.getUserAgent()},
+		cookies = {".ROBLOSECURITY": cookie},
+		proxies = {"http": Utils.getProxy()})
+	    return xcsrfRequest.headers["x-csrf-token"]
 
 	def getRequestVerificationToken(cookie):
+		useragent = Utils.getUserAgent()
 		requestHTML = requests.get(
 			"https://www.roblox.com/build/upload",
-			headers = {"referer": "https://roblox.com"},
-			cookies = {".ROBLOSECURITY": cookie}
-        )
+			headers = {"referer": "https://roblox.com", "User-Agent": useragent},
+			cookies = {".ROBLOSECURITY": cookie},
+			proxies = {"http": Utils.getProxy()})
 		try:
 			soup = BeautifulSoup(requestHTML.text, "lxml")
 			verifyToken = soup.find("input", {"name" : "__RequestVerificationToken"}).attrs["value"]
-		except Exception as E:
-			Write.Print(f"\n[>] Error: {E}\n[>] Enter to Exit...", Colors.purple_to_red, interval=0.0025)
-			input()
-			exit()
-		return verifyToken
-		
-	def getOutput(amount, request, proxy, useragent):
-		if request.status_code == 200:
-			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | ", Colors.green, interval=0.0025)
-		else:
-			Write.Print(f"\n[{amount}] {request.status_code} | {proxy} | {useragent} | ", Colors.purple_to_red, interval=0.0025)
+			return verifyToken
+			
+		except AttributeError as E:
+			Write.Print(f"\n\n[>] User-Agent Used: {useragent}", Colors.purple_to_red, interval=0.0025)
+			Write.Print(f"\n[>] Error: {E}\n[>] Continuing...\n", Colors.purple_to_red, interval=0.0025)
+			pass
+			return "Skipped"
 
+	def getOutput(amount, request, proxy, useragent):	
+		if request.status_code == 200:
+			Write.Print(f"\n[{amount}] {request.status_code} |  {proxy}{(25-(len(proxy)))*' '} |   {useragent}", Colors.green, interval=0)
+		else:
+			Write.Print(f"\n[{amount}] {request.status_code} |  {proxy}{(25-(len(proxy)))*' '} |   {useragent}", Colors.purple_to_red, interval=0)
 #Style & Designs		
 def getBanner():
 	bannerText = """
@@ -146,7 +148,6 @@ def report(victim, amount, reason, cooldown, descriptions):
 			cookies = {
 				".ROBLOSECURITY": cookie
 			}
-		)
-		
+		)		
 		Utils.getOutput(i, reportRequest, proxy, useragent)
-    #gig
+#gig
