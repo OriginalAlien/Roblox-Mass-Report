@@ -1,6 +1,6 @@
 # Roblox Mass Report
 I couldn't find a roblox mass report so I decided to make one myself and share it on Github.  
-This tool just spams the roblox report api with random user agents and proxies  
+This tool just spams the roblox report api with random user agents and proxies, but most doesnt proxies doesnt work  
 This could be ran on [Replit](https://replit.com/).  
 **It's for educational Purposes only**  
 
