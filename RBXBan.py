@@ -1,8 +1,8 @@
 #Importing Modules and Setting up proxies and useragents and cookie
-import requests, json, lxml
-import random, time
+import requests, json, lxml, random, time
 from bs4 import BeautifulSoup
 from pystyle import Colorate, Colors, Add, Center, Write
+validReports = 0
 
 c = open("cookies.txt", "r").readlines()
 u = open("useragents.txt", "r").readlines()
@@ -60,9 +60,11 @@ class Utils:
 			pass
 			return "Skipped"
 
-	def getOutput(amount, request, proxy, useragent):	
+	def getOutput(amount, request, proxy, useragent):
+		global validReports
 		if request.status_code == 200:
 			Write.Print(f"\n[{amount}] {request.status_code} |  {proxy}{(25-(len(proxy)))*' '} |   {useragent}", Colors.green, interval=0)
+			validReports += 1
 		else:
 			Write.Print(f"\n[{amount}] {request.status_code} |  {proxy}{(25-(len(proxy)))*' '} |   {useragent}", Colors.purple_to_red, interval=0)
 #Style & Designs		
@@ -149,4 +151,8 @@ def report(victim, amount, reason, cooldown, descriptions):
 		)		
 		Utils.getOutput(i, reportRequest, proxy, useragent)
 
+	Write.Print(f"\n\n[>] Finished Mass Report.\n[>] Reports Sent: {amount}\n[>] Valid Reports: {validReports}\n\n", Colors.purple_to_blue, interval=0.0025)
+	Write.Input("[>] Enter to Exit...", Colors.purple_to_blue, interval=0.0025)
+	
+	exit()
 #gig
