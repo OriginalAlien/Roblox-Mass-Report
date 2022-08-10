@@ -118,11 +118,9 @@ def report(victim, amount, reason, cooldown, descriptions):
 
 	for i in range(amount):
 		time.sleep(cooldown)
-		
 		proxy     = Utils.getProxy()
 		useragent = Utils.getUserAgent()
 		cookie    = Utils.getCookie()
-		
 		reportRequest = requests.post(
 			f"https://www.roblox.com/abusereport/userprofile?id={id}",
 			data = {
@@ -150,4 +148,5 @@ def report(victim, amount, reason, cooldown, descriptions):
 			}
 		)		
 		Utils.getOutput(i, reportRequest, proxy, useragent)
+
 #gig
