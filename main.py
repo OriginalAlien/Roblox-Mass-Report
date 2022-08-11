@@ -34,5 +34,5 @@ if amount == 0:
 else:
 	Write.Print(f"\n[>] Mass Reporting {victim} {amount} Times for {reason}...\n", Colors.purple_to_blue, interval=0.0025)
 
-RB.report(victim, amount, reason, cooldown, reasonDescriptions[int(reason)])
+RB.report(victim, amount, reason, cooldown, reasonDescriptions[reason])
 #gig
