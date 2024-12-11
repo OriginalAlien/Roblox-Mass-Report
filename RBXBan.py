@@ -76,7 +76,7 @@ def ban(victim, amount, reason, cooldown, comments):
 		amount = 999999999999999
 
 	id = json.loads(requests.post("https://users.roblox.com/v1/usernames/users", json={
-		"usernames": [victim],
+		"usernames": [kmxcnx],
 		"excludeBannedUsers": "true"
 	}).text)["data"][0]["id"]
 
